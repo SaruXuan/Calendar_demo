@@ -118,7 +118,17 @@ $(document).ready(function(){
     })
     //事項可拖拉
     $('#todolist').find('ul').sortable({
-        items: 'li:not(.new)'
+        items: 'li:not(.new)',
+        stop: function(event, ui) { //When sorting stop
+            var orderPair = [];
+            $('#todolist').find('li:not(.new)').each(function(index, val) { // make a dic of pairs of id and its order
+                orderPair.push({
+                    id: $(val).data('id'),
+                    order: index + 1
+                });
+            });
+            $.post("todo/sort.php", { orderPair: orderPair });
+        }
     });
 });
 
