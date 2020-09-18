@@ -1,27 +1,55 @@
 <?php include('header.php') ?>
 <?php include('data.php') ?>
 
-<div id='panel'>
-    <h1>Todo List</h1>
-    <div id='todolist'>
-        <ul id='todolist-ul'>
-            
-            <li class='clearfix new'>
-                <div class='checkbox'></div>
-                <div class='new_content' style='cursor: text;' contenteditable=true>Click to add new task...</div>
-            </li>
-            
-            <script id='todolist-item-template' type='text/x-handlebars-template'>
-                <li data-id='{{id}}' class='clearfix {{#if is_complete}}complete{{/if}}'>
-                    <div class='checkbox'></div>
-                    <div class='content'>{{content}}</div>
-                    <div class='actions'>
-                        <div class='delete'>x</div>
-                    </div>
-                </li>
-            </script>
+<div id="calender">
+    <div id="header">
+        <?= date('Y') ?> / <?= date('m') ?>
+    </div>
+    <div id="days">
+        <?php foreach ($days as $key => $value): ?>
+            <div class="day"><?= $value ?></div>
+        <?php endforeach ?>
+    </div>
+    <div id="dates">
+        <?php foreach ($dates as $key => $value): ?>
+            <div class="date-block <?= (is_null($value)) ? 'empty':'' ?>">
+                <div class="date"><?= $value ?></div>
+                <div class="event"></div>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div>
 
-        </ul>
+<div id="info-panel" class="new">
+    <div class="close">x</div>
+    <div class="title">
+        <label>Event</label>
+        <div contenteditable="true"></div>
+    </div>
+    <div class="time-picker">
+        <div class="selected-date">
+            <span class="month">09</span>/<span class="date">13</span>
+        </div>
+        <div class="from">
+            <label for="from">From</label><br>
+            <input type="time" name="start_time" id="from">
+        </div>
+        <div class="to">
+            <label for="to">To</label><br>
+            <input type="time" name="end_time" id="to">
+        </div>  
+    </div>
+    <div class="description">
+        <label for="description">description</label><br>
+        <textarea name="description" id="description"></textarea>
+    </div>
+    <div class="buttons clearfix">
+        <button class="create">create</button>
+        <button class="update">update</button>
+        <button class="cancel">cancel</button>
+        <button class="delete">delete</button>
+        <!--create: create/cancel-->
+        <!--update:-->
     </div>
 </div>
 

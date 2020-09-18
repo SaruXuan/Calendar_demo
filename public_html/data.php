@@ -1,20 +1,21 @@
 <?php
 //for read data from mysql
-include('../db.php');
+// include('../db.php');
 
-try {
-    $pdo = new PDO("mysql:host=$db[host];dbname=$db[dbname];port=$db[port];charset=$db[charset]", $db['username'], $db['password']);
-} catch(PDOException $e) {
-    echo "Database connection failed";
-    exit;
+// try {
+//     $pdo = new PDO("mysql:host=$db[host];dbname=$db[dbname];port=$db[port];charset=$db[charset]", $db['username'], $db['password']);
+// } catch(PDOException $e) {
+//     echo "Database connection failed";
+//     exit;
+// }
+
+$days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+$dates = [];
+for($i = 1; $i <= 31; $i++){
+    $dates[] = $i; //this is the push syntax
 }
-
-$sql = 'SELECT * FROM `todos` ORDER BY `order` ASC'; //get data from todos with ascending order
-$statement = $pdo->prepare($sql);
-$statement->execute();
-$todos = $statement->fetchAll(PDO::FETCH_ASSOC);
+$dates[] = null;
+$dates[] = null;
+$dates[] = null;
+$dates[] = null;
 ?>
-
-<script>
-    var todos = <?= json_encode($todos, JSON_NUMERIC_CHECK) ?>
-</script>
