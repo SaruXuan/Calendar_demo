@@ -43,9 +43,16 @@
     top: 5px;
     cursor: pointer;
 }
+#info-panel .title {
+    width: 100%;
+}
 #info-panel label {
     color: #ccc;
     font-size: 0.8rem;
+}
+#info-panel .event-input {
+    width: 100%;
+    border: 1px solid #ccc;
 }
 #info-panel .event-input:focus {
     outline-color: #ced;
@@ -85,6 +92,7 @@
     color: white;
     padding: 0 5px;
     border-radius: 10px;
+    margin-bottom: 2px;
 }
 .event .title, .event .from {
     float: left;
