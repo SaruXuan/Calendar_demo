@@ -19,7 +19,7 @@
     border-right: 1px solid;
 }
 .date-block {
-    height: 10vh;
+    height: 15vh;
     border-top: 1px solid;
     border-left: 1px solid;
     padding: 5px;
@@ -31,8 +31,6 @@
     display: none;
     position: fixed;
     width: 250px;
-    top: 50px;
-    right: 30%;
     border: 1px solid #ccc;
     background-color: white;
 }
@@ -48,6 +46,9 @@
 #info-panel label {
     color: #ccc;
     font-size: 0.8rem;
+}
+#info-panel .event-input:focus {
+    outline-color: #ced;
 }
 #info-panel .title, #info-panel .time-picker {
     border-bottom: 1px solid #ccc;
@@ -78,4 +79,17 @@
 }
 #info-panel.update button.delete {
     width: 100%;
+}
+.event {
+    background-color: royalblue;
+    color: white;
+    padding: 0 5px;
+    border-radius: 10px;
+}
+.event .title, .event .from {
+    float: left;
+    font-size: 5px;
+}
+.event .title {
+    float: right;
 }
