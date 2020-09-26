@@ -4,6 +4,7 @@ $(document).ready(function(){
     var panel = {
         el: '#info-panel',
         selectedDateBlock: null,
+        selectedEvent: null,
         init: function(isNew, e) {
             //清除前面填寫的資料
             panel.clear();
@@ -89,18 +90,25 @@ $(document).ready(function(){
         }
     };
 
-    //雙擊跳出事件視窗
+    //雙擊跳出事件視窗(NEW)
     $('.date-block').on('dblclick', function(e){
         //呼叫panel的open函式
         panel.open(true, e);
     });
 
-    
+    //雙擊跳出事件視窗(UPDATE)
     $('.date-block').on('dblclick', '.event', function(e){
         //停止event bubbling
         e.stopPropagation();
         //呼叫panel的open函式
         panel.open(false, e);
+
+        panel.selectedEvent = $(e.currentTarget);
+
+        //Load之前的資料進panel
+        var id = $(this).data('id');
+        //AJAX - event detail
+        //show on screen
     });
 
 
@@ -132,14 +140,21 @@ $(document).ready(function(){
                 panel.close();
             }
             if ($(this).is('.update')) {
-
+                //收集DATA
+                //AJAX - update.php
+                //改變UI
             }
             if ($(this).is('.cancel')) {
                 //關閉事件視窗
                 panel.close();
             }
             if ($(this).is('.delete')) {
-
+                //id
+                var id = panel.selectedEvent.data('id');
+                //AJAX - delete.php
+                //remove event
+                panel.selectedEvent.remove();
+                panel.close();
             }
         })
     //點擊叉叉關閉事件視窗
