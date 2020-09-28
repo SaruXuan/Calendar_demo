@@ -1,5 +1,7 @@
 $(document).ready(function(){
-
+    //準備好event template
+    var source = $('#event-template').html();
+    var eventTemplate = Handlebars.compile(source);
     //將事件處理包成dic
     var panel = {
         el: '#info-panel',
@@ -73,10 +75,13 @@ $(document).ready(function(){
             }
             //從#calender取得月
             var month = $('#calender').data('month');
+            //從#calender取得年
+            var year = $('#calender').data('year');
             //印出
             $(panel.el).find('.month').text(month);
             $(panel.el).find('.date').text(date);
             //日期資料存放input
+            $(panel.el).find('input[name="year]').val(year);
             $(panel.el).find('input[name="month"]').val(month);
             $(panel.el).find('input[name="date"]').val(date);
 
@@ -119,25 +124,17 @@ $(document).ready(function(){
             e.preventDefault();
             if ($(this).is('.create')) {
                 //收集data(title, from, to, description)
-                var data = $(panel.el).find('form').serialize();
+                var data = $(panel.el).find('form').serialize();//所有資料轉成字串
+                console.log(data);
                 //AJAX
-                // $.post("url", data,
-                //     function (data, textStatus, jqXHR) {
-                        
-                //     },
-                //     "dataType"
-                // );
-                //插入進events
-                var source = $('#event-template').html();
-                var eventTemplate = Handlebars.compile(source);
-                var event = {
-                    id: 1,
-                    title: 'title',
-                    start_time: '10:00',
-                };
-                var eventUI = eventTemplate(event);
-                panel.selectedDateBlock.find('.events').append(eventUI);
-                panel.close();
+                $.post("event/create.php", data,
+                    function (event, textStatus, jqXHR) {
+                        //插入進events
+                        var eventUI = eventTemplate(event);
+                        panel.selectedDateBlock.find('.events').append(eventUI);
+                        panel.close();
+                    },
+                );
             }
             if ($(this).is('.update')) {
                 //收集DATA

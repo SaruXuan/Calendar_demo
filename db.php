@@ -4,7 +4,7 @@ $db = [
     'port' => 8889,
     'dbname' => 'calender_demo',
     'username' => 'samuel',
-    'password' => 'Wpdi*1234',
+    'password' => '0209',
     'charset' => 'utf8'
 ];
 ?>

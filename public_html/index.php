@@ -36,6 +36,7 @@
         <div class="time-picker">
             <div class="selected-date">
                 <span class="month"></span>/<span class="date"></span>
+                <input type="hidden" name="year">
                 <input type="hidden" name="month">
                 <input type="hidden" name="date">
             </div>
