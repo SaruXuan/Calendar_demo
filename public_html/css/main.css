@@ -1,4 +1,4 @@
-#calender {
+#calendar {
     width: 90%;
     margin: 0 auto;
 }
@@ -23,10 +23,16 @@
     border-top: 1px solid;
     border-left: 1px solid;
     padding: 5px;
+    overflow: auto;
 }
 .date-block.empty {
     background-color: #eee;
 }
+
+
+/*info panel*/
+
+
 #info-panel {
     display: none;
     position: fixed;
@@ -62,6 +68,12 @@
 }
 #info-panel .title, #info-panel .time-picker, #info-panel .description {
     padding: 10px;
+}
+.error-msg {
+    display: none;
+}
+.error-msg.open {
+    display: block;
 }
 .selected-date {
     text-align: center;

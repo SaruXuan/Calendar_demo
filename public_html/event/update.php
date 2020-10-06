@@ -28,24 +28,20 @@ if ($startTime[0]>$endTime[0] || ($startTime[0]==$endTime[0] && $startTime[1]>$e
 
 
 //Prepare SQL command template
-$sql = 'INSERT INTO `events` (`title`, `year`, `month`, `date`, `start_time`, `end_time`, `description`)
-VALUES (:title, :year, :month, :date, :start_time, :end_time, :description)';
+$sql = 'UPDATE `events` SET `title`=:title, `start_time`=:start_time, `end_time`=:end_time, `description`=:description
+        WHERE `id`=:id';
 
 $statement = $pdo->prepare($sql);
 $statement->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
-$statement->bindValue(':year', $_POST['year'], PDO::PARAM_INT);
-$statement->bindValue(':month', $_POST['month'], PDO::PARAM_INT);
-$statement->bindValue(':date', $_POST['date'], PDO::PARAM_INT);
 $statement->bindValue(':start_time', $_POST['start_time'], PDO::PARAM_STR);//10:00
 $statement->bindValue(':end_time', $_POST['end_time'], PDO::PARAM_STR);
 $statement->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
-//Auto Increment so no need to insert id
+$statement->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
 
 if ($statement->execute()) {
-    $id = $pdo->lastInsertId();
     $sql = 'SELECT `title`, `start_time`, `id` FROM `events` WHERE `id`=:id';
     $statement = $pdo->prepare($sql);
-    $statement->bindValue(':id', $id, PDO::PARAM_INT);
+    $statement->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
     $statement->execute();
     $event = $statement->fetch(PDO::FETCH_ASSOC);//return the array of the latest entity from query
 

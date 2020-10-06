@@ -16,10 +16,6 @@
             <div class="date-block <?= (is_null($value)) ? 'empty':'' ?>" data-date="<?= $value ?>">
                 <div class="date"><?= $value ?></div>
                 <div class="events">
-                    <div class="event clearfix" data-id="">
-                        <div class="from">10:00</div>
-                        <div class="title">title</div>
-                    </div>
                 </div>
             </div>
         <?php endforeach ?>
@@ -29,9 +25,13 @@
 <div id="info-panel">
     <div class="close">x</div>
     <form>
+        <input type="hidden" name="id">
         <div class="title">
             <label>Event</label><br>
             <input type="text" class='event-input' name="title">
+        </div>
+        <div class="error-msg">
+            <div class="alert alert-danger"></div>
         </div>
         <div class="time-picker">
             <div class="selected-date">
