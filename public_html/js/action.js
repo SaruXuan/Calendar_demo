@@ -88,6 +88,9 @@ $(document).ready(function(){
                 var date = $(e.currentTarget).data('date');
             } else {
                 var date = $(e.currentTarget).closest('.date-block').data('date');
+                //done
+                var done = $(e.currentTarget).data('done');
+                $(panel.el).find('input[name="done"]').val(done);
             }
             //印出
             $(panel.el).find('.month').text(month);
@@ -123,6 +126,12 @@ $(document).ready(function(){
         e.stopPropagation();
         //呼叫panel的open函式
         panel.open(false, e);
+
+        if($(e.currentTarget).data('done')) {
+            $(panel.el).find('.done').text('undone');
+        } else {
+            $(panel.el).find('.done').text('done');
+        }
 
         panel.selectedEvent = $(e.currentTarget);
 
@@ -226,6 +235,31 @@ $(document).ready(function(){
             if ($(this).is('.cancel')) {
                 //關閉事件視窗
                 panel.close();
+            }
+            if($(this).is('.done')) {
+                //槓掉
+                if(panel.selectedEvent.data('done')==0) {
+                    var data = {
+                        'id': panel.selectedEvent.data('id'),
+                        'done': 1
+                    };
+                    panel.selectedEvent.attr({'data-done': 1});
+                    panel.selectedEvent.data('done', 1);
+                }else if(panel.selectedEvent.data('done')==1) {
+                    var data = {
+                        'id': panel.selectedEvent.data('id'),
+                        'done': 0
+                    };
+                    panel.selectedEvent.attr({'data-done': 0});
+                    panel.selectedEvent.data('done', 0);
+                }
+                
+                $.post("event/done.php", data,
+                    function (event, textStatus, jqXHR) {
+                        
+                        panel.close();
+                    },
+                );
             }
             if ($(this).is('.delete')) {
                 //id

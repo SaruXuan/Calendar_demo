@@ -28,8 +28,8 @@ if ($startTime[0]>$endTime[0] || ($startTime[0]==$endTime[0] && $startTime[1]>$e
 
 
 //Prepare SQL command template
-$sql = 'INSERT INTO `events` (`title`, `year`, `month`, `date`, `start_time`, `end_time`, `description`)
-VALUES (:title, :year, :month, :date, :start_time, :end_time, :description)';
+$sql = 'INSERT INTO `events` (`title`, `year`, `month`, `date`, `start_time`, `end_time`, `description`, `done`)
+VALUES (:title, :year, :month, :date, :start_time, :end_time, :description, :done)';
 
 $statement = $pdo->prepare($sql);
 $statement->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
@@ -39,11 +39,12 @@ $statement->bindValue(':date', $_POST['date'], PDO::PARAM_INT);
 $statement->bindValue(':start_time', $_POST['start_time'], PDO::PARAM_STR);//10:00
 $statement->bindValue(':end_time', $_POST['end_time'], PDO::PARAM_STR);
 $statement->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
+$statement->bindValue(':done', 0, PDO::PARAM_INT);
 //Auto Increment so no need to insert id
 
 if ($statement->execute()) {
     $id = $pdo->lastInsertId();
-    $sql = 'SELECT `title`, `start_time`, `id` FROM `events` WHERE `id`=:id';
+    $sql = 'SELECT `title`, `start_time`, `id`, `done` FROM `events` WHERE `id`=:id';
     $statement = $pdo->prepare($sql);
     $statement->bindValue(':id', $id, PDO::PARAM_INT);
     $statement->execute();

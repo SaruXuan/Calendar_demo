@@ -39,6 +39,7 @@
                 <input type="hidden" name="year">
                 <input type="hidden" name="month">
                 <input type="hidden" name="date">
+                <input type="hidden" name="done">
             </div>
             <div class="from">
                 <label for="from">From</label><br>
@@ -57,9 +58,8 @@
             <button class="create">create</button>
             <button class="update">update</button>
             <button class="cancel">cancel</button>
+            <button class="done">done</button>
             <button class="delete">delete</button>
-            <!--create: create/cancel-->
-            <!--update:-->
         </div>
     </form>
 </div>

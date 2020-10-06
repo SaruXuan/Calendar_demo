@@ -1,4 +1,4 @@
-#calendar {
+#calender {
     width: 90%;
     margin: 0 auto;
 }
@@ -91,20 +91,28 @@
     float: left;
     width: 50%;
 }
-#info-panel.update button.update, #info-panel.update button.cancel, #info-panel.update button.delete {
+#info-panel.update button.update, #info-panel.update button.cancel, #info-panel.update button.delete, #info-panel.update button.done {
     display: block;
     float: left;
     width: 50%;
 }
-#info-panel.update button.delete {
-    width: 100%;
-}
+
+/* event */
+
 .event {
     background-color: royalblue;
     color: white;
     padding: 0 5px;
     border-radius: 10px;
     margin-bottom: 2px;
+}
+.event[data-done="0"] .title {
+    text-decoration: none;
+    color: white;
+}
+.event[data-done="1"] .title {
+    text-decoration: line-through;
+    color: black;
 }
 .event .title, .event .from {
     float: left;
