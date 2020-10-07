@@ -26,17 +26,28 @@ foreach ($events as $key => $value) {
     $events[$key]['start_time'] = substr($value['start_time'], 0, 5);
 }
 
+//這個月有幾天
+$howManyDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+//一號是星期幾 && calculate padding
+$firstDateOfTheMonth = new DateTime($year+'-'+$month+'-'+'1');
+$frontPadding = $firstDateOfTheMonth->format('w'); //0-6
+$lastDateOfTheMonth = new DateTime($year+'-'+$month+'-'+$howManyDays);
+$backPadding = 6 - $lastDateOfTheMonth->format('w');
 
 
+//填前面的padding + dates + 後面的padding
 $days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 $dates = [];
-for($i = 1; $i <= 31; $i++){
+for($i = 1; $i <= $frontPadding; $i++) {
+    $dates[] = null;
+}
+for($i = 1; $i <= $howManyDays; $i++){
     $dates[] = $i; //this is the push syntax
 }
-$dates[] = null;
-$dates[] = null;
-$dates[] = null;
-$dates[] = null;
+for($i = 1; $i <= $backPadding; $i++) {
+    $dates[] = null;
+}
 ?>
 
 <script>
